@@ -88,7 +88,7 @@ kubectl logs busybox
 </p>
 </details>
 
-### Create a busybox pod (using YAML) that runs the command "env". Run it and see the output
+### Create a busybox pod (using YAML) that runs the command "env". Run it and see the output (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -129,7 +129,7 @@ kubectl logs busybox
 </p>
 </details>
 
-### Get the YAML for a new namespace called 'myns' without creating it
+### Get the YAML for a new namespace called 'myns' without creating it (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -141,7 +141,7 @@ kubectl create namespace myns -o yaml --dry-run=client
 </p>
 </details>
 
-### Get the YAML for a new ResourceQuota called 'myrq' with hard limits of 1 CPU, 1G memory and 2 pods without creating it
+### Get the YAML for a new ResourceQuota called 'myrq' with hard limits of 1 CPU, 1G memory and 2 pods without creating it (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -181,7 +181,7 @@ kubectl run nginx --image=nginx --restart=Never --port=80
 </p>
 </details>
 
-### Change pod's image to nginx:1.7.1. Observe that the container will be restarted as soon as the image gets pulled
+### Change pod's image to nginx:1.7.1. Observe that the container will be restarted as soon as the image gets pulled (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -289,7 +289,7 @@ kubectl logs nginx
 </p>
 </details>
 
-### If pod crashed and restarted, get logs about the previous instance
+### If pod crashed and restarted, get logs about the previous instance (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -303,7 +303,7 @@ kubectl logs nginx --previous
 </p>
 </details>
 
-### Execute a simple shell on the nginx pod
+### Execute a simple shell on the nginx pod (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -329,7 +329,7 @@ kubectl run busybox --image=busybox -it --restart=Never -- /bin/sh -c 'echo hell
 </p>
 </details>
 
-### Do the same, but have the pod deleted automatically when it's completed
+### Do the same, but have the pod deleted automatically when it's completed (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -342,7 +342,7 @@ kubectl get po # nowhere to be found :)
 </p>
 </details>
 
-### Create an nginx pod and set an env value as 'var1=val1'. Check the env value existence within the pod
+### Create an nginx pod and set an env value as 'var1=val1'. Check the env value existence within the pod (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
