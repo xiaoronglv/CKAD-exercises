@@ -205,7 +205,7 @@ kubectl delete po busybox --force --grace-period=0
 </details>
 
 
-### Get CPU/memory utilization for nodes ([metrics-server](https://github.com/kubernetes-incubator/metrics-server) must be running)
+### Get CPU/memory utilization for nodes ([metrics-server](https://github.com/kubernetes-incubator/metrics-server) must be running)  (🔴 x 1 not yet figured out)
 
 <details><summary>show</summary>
 <p>
