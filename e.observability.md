@@ -134,7 +134,7 @@ kubectl delete -f pod.yaml
 </p>
 </details>
 
-### Lots of pods are running in `qa`,`alan`,`test`,`production` namespaces.  All of these pods are configured with liveness probe.  Please list all pods whose liveness probe are failed in the format of `<namespace>/<pod name>` per line.
+### Lots of pods are running in `qa`,`alan`,`test`,`production` namespaces.  All of these pods are configured with liveness probe.  Please list all pods whose liveness probe are failed in the format of `<namespace>/<pod name>` per line.  (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
