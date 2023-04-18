@@ -90,6 +90,11 @@ kubectl logs busybox
 
 ### Create a busybox pod (using YAML) that runs the command "env". Run it and see the output (🔴 x 1)
 
+Check point:
+
+- [ ] what's the difference between command and argus?
+
+
 <details><summary>show</summary>
 <p>
 
