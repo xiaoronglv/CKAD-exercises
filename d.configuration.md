@@ -79,7 +79,7 @@ kubectl get cm configmap3 -o yaml
 </p>
 </details>
 
-### Create and display a configmap from a file, giving the key 'special'
+### Create and display a configmap from a file, giving the key 'special'  (🔴 x 1)
 
 Create the file with
 
@@ -184,7 +184,7 @@ kubectl exec -it nginx -- env
 </p>
 </details>
 
-### Create a configMap 'cmvolume' with values 'var8=val8', 'var9=val9'. Load this as a volume inside an nginx pod on path '/etc/lala'. Create the pod and 'ls' into the '/etc/lala' directory.
+### Create a configMap 'cmvolume' with values 'var8=val8', 'var9=val9'. Load this as a volume inside an nginx pod on path '/etc/lala'. Create the pod and 'ls' into the '/etc/lala' directory.  (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -350,7 +350,7 @@ status: {}
 ## Limit Ranges
 kubernetes.io > Documentation > Concepts > Policies > Limit Ranges (https://kubernetes.io/docs/concepts/policy/limit-range/)
 
-### Create a namespace with limit range
+### Create a namespace with limit range  (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
