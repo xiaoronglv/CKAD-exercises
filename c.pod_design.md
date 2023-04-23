@@ -52,7 +52,7 @@ kubectl label po nginx2 app=v2 --overwrite
 </p>
 </details>
 
-### Get the label 'app' for the pods (show a column with APP labels)
+### Get the label 'app' for the pods (show a column with APP labels)  (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -82,7 +82,7 @@ kubectl get po --selector=app=v2
 </p>
 </details>
 
-### Add a new label tier=web to all pods having 'app=v2' or 'app=v1' labels
+### Add a new label tier=web to all pods having 'app=v2' or 'app=v1' labels   (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -94,7 +94,7 @@ kubectl label po -l "app in(v1,v2)" tier=web
 </details>
 
 
-### Add an annotation 'owner: marketing' to all pods having 'app=v2' label
+### Add an annotation 'owner: marketing' to all pods having 'app=v2' label  (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -105,7 +105,7 @@ kubectl annotate po -l "app=v2" owner=marketing
 </p>
 </details>
 
-### Remove the 'app' label from the pods we created before
+### Remove the 'app' label from the pods we created before  (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -246,7 +246,7 @@ kubectl delete po nginx{1..3}
 
 kubernetes.io > Documentation > Concepts > Workloads > Workload Resources > [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment)
 
-### Create a deployment with image nginx:1.18.0, called nginx, having 2 replicas, defining port 80 as the port that this container exposes (don't create a service for this deployment)
+### Create a deployment with image nginx:1.18.0, called nginx, having 2 replicas, defining port 80 as the port that this container exposes (don't create a service for this deployment)  (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -320,7 +320,7 @@ kubectl get po nginx-7bf7478b77-gjzp8 -o yaml
 </p>
 </details>
 
-### Check how the deployment rollout is going
+### Check how the deployment rollout is going  (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -363,7 +363,7 @@ kubectl get po
 </p>
 </details>
 
-### Undo the latest rollout and verify that new pods have the old image (nginx:1.18.0)
+### Undo the latest rollout and verify that new pods have the old image (nginx:1.18.0)  (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -394,7 +394,7 @@ kubectl edit deploy nginx
 </p>
 </details>
 
-### Verify that something's wrong with the rollout
+### Verify that something's wrong with the rollout  (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -409,7 +409,7 @@ kubectl get po # you'll see 'ErrImagePull' or 'ImagePullBackOff'
 </details>
 
 
-### Return the deployment to the second revision (number 2) and verify the image is nginx:1.19.8
+### Return the deployment to the second revision (number 2) and verify the image is nginx:1.19.8  (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -423,7 +423,7 @@ kubectl rollout status deploy nginx # Everything should be OK
 </p>
 </details>
 
-### Check the details of the fourth revision (number 4)
+### Check the details of the fourth revision (number 4)  (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -449,7 +449,7 @@ kubectl describe deploy nginx
 </p>
 </details>
 
-### Autoscale the deployment, pods between 5 and 10, targetting CPU utilization at 80%
+### Autoscale the deployment, pods between 5 and 10, targetting CPU utilization at 80% （这个功能很棒啊，我以前都没有留意到过！这个应用价值很大！） (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -462,6 +462,10 @@ kubectl get hpa nginx
 
 </p>
 </details>
+
+
+
+-----------  2023-04-23 下面的是还没学的 --------------------
 
 ### Pause the rollout of the deployment
 
