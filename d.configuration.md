@@ -601,7 +601,7 @@ kubectl create secret generic mysecret2 --from-file=username
 
 ### Get the value of mysecret2 
 
-> 2023-07-18 note: kubectl describe mysecret2 doesn't work
+> :warning: 2023-07-18 note: kubectl describe mysecret2 doesn't work
 
 <details><summary>show</summary>
 <p>
