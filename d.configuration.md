@@ -599,7 +599,9 @@ kubectl create secret generic mysecret2 --from-file=username
 </p>
 </details>
 
-### Get the value of mysecret2
+### Get the value of mysecret2 
+
+> 2023-07-18 note: kubectl describe mysecret2 doesn't work
 
 <details><summary>show</summary>
 <p>
