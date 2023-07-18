@@ -99,6 +99,10 @@ kubectl get cm configmap4 -o yaml
 </p>
 </details>
 
+> 2023-07-18 Done
+
+
+
 ### Create a configMap called 'options' with the value var5=val5. Create a new nginx pod that loads the value from variable 'var5' in an env variable called 'option'
 
 <details><summary>show</summary>
