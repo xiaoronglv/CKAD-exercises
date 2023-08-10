@@ -150,18 +150,21 @@ kubectl get po -l app=foo -o jsonpath='{range .items[*]}{.status.podIP}{"\n"}{en
 
 ### Create a service that exposes the deployment on port 6262. Verify its existence, check the endpoints
 
+Faild 🔴 x 1 I forgot to add the target port
+
 <details><summary>show</summary>
 <p>
 
 
 ```bash
-kubectl expose deploy foo --port=6262 --target-port=8080
+kubectl expose deploy foo --port=6262 --target-port=8080   
 kubectl get service foo # you will see ClusterIP as well as port 6262
 kubectl get endpoints foo # you will see the IPs of the three replica pods, listening on port 8080
 ```
 
 </p>
 </details>
+
 
 ### Create a temp busybox pod and connect via wget to foo service. Verify that each time there's a different hostname returned. Delete deployment and services to cleanup the cluster
 
