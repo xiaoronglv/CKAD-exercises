@@ -236,6 +236,8 @@ kubectl run busybox --image=busybox --rm -it --restart=Never -- wget -O- 10.1.1.
 
 Alternatively you can also try a more advanced option:
 
+Ryan's Comments: jsonpath is really fun!
+
 ```bash
 # Get IP of the nginx pod
 NGINX_IP=$(kubectl get pod nginx -o jsonpath='{.status.podIP}')
