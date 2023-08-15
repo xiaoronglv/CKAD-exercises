@@ -516,7 +516,11 @@ kubectl describe deploy nginx
 </p>
 </details>
 
-### Autoscale the deployment, pods between 5 and 10, targetting CPU utilization at 80% （这个功能很棒啊，我以前都没有留意到过！这个应用价值很大！） (🔴 x 1)
+### Autoscale the deployment, pods between 5 and 10, targetting CPU utilization at 80% (🔴 x 1)
+
+> ⚠ 这个功能很棒啊，我以前都没有留意到过！这个应用价值很大！
+>
+> question: how to check the configuration of autoscale?
 
 <details><summary>show</summary>
 <p>
