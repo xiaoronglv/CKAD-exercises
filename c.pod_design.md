@@ -520,7 +520,7 @@ kubectl describe deploy nginx
 
 > ⚠ 这个功能很棒啊，我以前都没有留意到过！这个应用价值很大！
 >
-> question: how to check the configuration of autoscale?
+> Question: [how to check the configuration of autoscale?](https://stackoverflow.com/questions/76903296/kubernetes-how-to-check-the-autoscaling-policy-of-my-deployment)
 
 <details><summary>show</summary>
 <p>
