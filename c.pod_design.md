@@ -535,9 +535,6 @@ kubectl get hpa nginx
 </details>
 
 
-
------------  2023-04-23 下面的是还没学的 --------------------
-
 ### Pause the rollout of the deployment
 
 <details><summary>show</summary>
