@@ -1,11 +1,11 @@
 ![](https://gaforgithub.azurewebsites.net/api?repo=CKAD-exercises/pod_design&empty)
 # Pod design (20%)
 
-[Labels And Annotations](#labels-and-annotations)
+[Labels And Annotations ✅](#labels-and-annotations)
 
-[Pod Placement](#pod-placement)
+[Pod Placement](#pod-placement)  
 
-[Deployments](#deployments)
+[Deployments ✅](#deployments)
 
 [Jobs](#jobs)
 
