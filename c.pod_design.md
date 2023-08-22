@@ -52,7 +52,7 @@ kubectl label po nginx2 app=v2 --overwrite
 </p>
 </details>
 
-### Get the label 'app' for the pods (show a column with APP labels)  (🔴 x 1)
+### Get the label 'app' for the pods (show a column with APP labels)
 
 <details><summary>show</summary>
 <p>
