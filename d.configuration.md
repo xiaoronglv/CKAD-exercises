@@ -835,8 +835,9 @@ kubectl describe pod nginx # will see that a new secret called myuser-token-****
 </p>
 </details>
 
-### Generate an API token for the service account 'myuser'
+### Generate an API token for the service account 'myuser' (🔴 x1)
 
+> ⚠ Stack Overflow: [Service account secret is not listed. How to fix it?](https://kubernetes.io/docs/concepts/configuration/secret/#service-account-token-secrets)
 <details><summary>show</summary>
 <p>
   
