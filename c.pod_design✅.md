@@ -878,7 +878,7 @@ status: {}
 
 ### Create the same job, make it run 5 times, one after the other. Verify its status and delete it
 
-> ❓ Question: what's the purpose of running the job multiple times?
+> ⚠ Question: what's the purpose of running the job multiple times?
 <details><summary>show</summary>
 <p>
 
