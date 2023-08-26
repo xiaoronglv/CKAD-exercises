@@ -7,7 +7,7 @@
 
 [Deployments](#deployments) ✅
 
-[Jobs](#jobs)
+[Jobs](#jobs) ✅
 
 [Cron Jobs](#cron-jobs) ✅
 
