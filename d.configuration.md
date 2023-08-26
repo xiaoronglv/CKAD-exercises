@@ -7,7 +7,7 @@
 
 [Requests and Limits](#requests-and-limits)
 
-[Secrets](#secrets)
+[Secrets](#secrets) ✅
 
 [Service Accounts](#serviceaccounts)
 
