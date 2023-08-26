@@ -9,7 +9,7 @@
 
 [Secrets](#secrets) ✅
 
-[Service Accounts](#serviceaccounts)
+[Service Accounts](#serviceaccounts) ✅
 
 ## ConfigMaps
 
