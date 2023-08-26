@@ -1,6 +1,11 @@
 ![](https://gaforgithub.azurewebsites.net/api?repo=CKAD-exercises/observability&empty)
 # Observability (18%)
 
+[Liveness, readiness and startup probes](#Liveness-readiness-and-startup-probes)  ✅
+
+[Debugging](#Debugging)
+
+
 ## Liveness, readiness and startup probes
 
 kubernetes.io > Documentation > Tasks > Configure Pods and Containers > [Configure Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)
