@@ -1,15 +1,15 @@
 ![](https://gaforgithub.azurewebsites.net/api?repo=CKAD-exercises/pod_design&empty)
 # Pod design (20%)
 
-[Labels And Annotations ✅](#labels-and-annotations)
+[Labels And Annotations](#labels-and-annotations) ✅
 
 [Pod Placement](#pod-placement)  
 
-[Deployments ✅](#deployments)
+[Deployments](#deployments) ✅
 
 [Jobs](#jobs)
 
-[Cron Jobs](#cron-jobs)
+[Cron Jobs](#cron-jobs) ✅
 
 ## Labels and Annotations
 kubernetes.io > Documentation > Concepts > Overview > Working with Kubernetes Objects > [Labels and Selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors)
