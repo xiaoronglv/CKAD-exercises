@@ -1,9 +1,9 @@
 ![](https://gaforgithub.azurewebsites.net/api?repo=CKAD-exercises/observability&empty)
 # Observability (18%)
 
-[Liveness, readiness and startup probes](#Liveness-readiness-and-startup-probes)  ✅
+[Liveness, readiness and startup probes](#Liveness-readiness-and-startup-probes) 
 
-[Debugging](#Debugging)
+[Debugging](#Debugging)  ✅
 
 
 ## Liveness, readiness and startup probes
