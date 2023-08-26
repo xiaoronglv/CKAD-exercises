@@ -3,9 +3,11 @@
 
 [Liveness, readiness and startup probes](#Liveness-readiness-and-startup-probes) 
 
+[Logging](#Logging)
+
 [Debugging](#Debugging)  ✅
 
-[Logging](#Logging)
+
 
 
 ## Liveness, readiness and startup probes
