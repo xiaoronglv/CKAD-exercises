@@ -5,6 +5,8 @@
 
 [Debugging](#Debugging)  ✅
 
+[Logging](#Logging)
+
 
 ## Liveness, readiness and startup probes
 
