@@ -3,7 +3,7 @@
 
 [Liveness, readiness and startup probes](#Liveness-readiness-and-startup-probes) 
 
-[Logging](#Logging)
+[Logging](#Logging)   ✅
 
 [Debugging](#Debugging)  ✅
 
