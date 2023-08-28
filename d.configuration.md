@@ -3,7 +3,7 @@
 
 [ConfigMaps](#configmaps)  ✅
 
-[SecurityContext](#securitycontext)
+[SecurityContext](#securitycontext) ✅
 
 [Requests and Limits](#requests-and-limits)
 
