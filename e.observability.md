@@ -1,7 +1,7 @@
 ![](https://gaforgithub.azurewebsites.net/api?repo=CKAD-exercises/observability&empty)
 # Observability (18%)
 
-[Liveness, readiness and startup probes](#Liveness-readiness-and-startup-probes) 
+[Liveness, readiness and startup probes](#Liveness-readiness-and-startup-probes) ✅
 
 [Logging](#Logging)   ✅
 
@@ -146,8 +146,8 @@ kubectl delete -f pod.yaml
 ### Lots of pods are running in `qa`,`alan`,`test`,`production` namespaces.  All of these pods are configured with liveness probe.  Please list all pods whose liveness probe are failed in the format of `<namespace>/<pod name>` per line.  (🔴 x 1)
 
 > ⚠ learning objective:
-> jq command.
-> jq to iterate an array.
+> - jq command.
+> - jq to iterate an array.
 
 <details><summary>show</summary>
 <p>
