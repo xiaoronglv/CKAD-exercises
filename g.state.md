@@ -9,12 +9,16 @@ kubernetes.io > Documentation > Tasks > Configure Pods and Containers > [Configu
 
 ### Create busybox pod with two containers, each one will have the image busybox and will run the 'sleep 3600' command. Make both containers mount an emptyDir at '/etc/foo'. Connect to the second busybox, write the first column of '/etc/passwd' file to '/etc/foo/passwd'. Connect to the first busybox and write '/etc/foo/passwd' file to standard output. Delete pod.
 
+> ⚠ Learning Objective: use the awk command
+>
+>
+
 <details><summary>show</summary>
 <p>
 
 *This question is probably a better fit for the 'Multi-container-pods' section but I'm keeping it here as it will help you get acquainted with state*
 
-Easiest way to do this is to create a template pod with:
+The easiest way to do this is to create a template pod with:
 
 ```bash
 kubectl run busybox --image=busybox --restart=Never -o yaml --dry-run=client -- /bin/sh -c 'sleep 3600' > pod.yaml
