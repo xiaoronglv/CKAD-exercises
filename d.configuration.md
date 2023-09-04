@@ -5,7 +5,11 @@
 
 [SecurityContext](#securitycontext) ✅
 
-[Resource requests and limits](#resource-requests-and-limits)
+[Pod: requests and limits](#resource-requests-and-limits)
+
+[Namespace: resource-quotas](#resource-quotas)
+
+[Limit Range](#limit-ranges)
 
 [Secrets](#secrets) ✅
 
