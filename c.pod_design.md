@@ -3,7 +3,7 @@
 
 [Labels And Annotations](#labels-and-annotations) ✅
 
-[Pod Placement](#pod-placement)  
+[Pod Placement](#pod-placement)  ✅
 
 [Deployments](#deployments) ✅
 
