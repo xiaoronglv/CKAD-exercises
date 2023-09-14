@@ -1,4 +1,5 @@
 ![](https://gaforgithub.azurewebsites.net/api?repo=CKAD-exercises/core_concepts&empty)
+
 # Core Concepts (13%)
 
 kubernetes.io > Documentation > Reference > kubectl CLI > [kubectl Cheat Sheet](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)
@@ -50,10 +51,10 @@ metadata:
   namespace: mynamespace
 spec:
   containers:
-  - image: nginx
-    imagePullPolicy: IfNotPresent
-    name: nginx
-    resources: {}
+    - image: nginx
+      imagePullPolicy: IfNotPresent
+      name: nginx
+      resources: {}
   dnsPolicy: ClusterFirst
   restartPolicy: Never
 status: {}
@@ -93,7 +94,6 @@ kubectl logs busybox
 Check point:
 
 - [ ] what's the difference between command and argus?
-
 
 <details><summary>show</summary>
 <p>
@@ -146,7 +146,7 @@ kubectl create namespace myns -o yaml --dry-run=client
 </p>
 </details>
 
-### Get the YAML for a new ResourceQuota called 'myrq' with hard limits of 1 CPU, 1G memory and 2 pods without creating it (🔴 x 1)
+### Create the YAML for a new ResourceQuota called 'myrq' with hard limits of 1 CPU, 1G memory and 2 pods without creating it (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -166,11 +166,13 @@ kubectl create quota myrq --hard=cpu=1,memory=1G,pods=2 --dry-run=client -o yaml
 ```bash
 kubectl get po --all-namespaces
 ```
-Alternatively 
+
+Alternatively
 
 ```bash
 kubectl get po -A
 ```
+
 </p>
 </details>
 
@@ -191,7 +193,7 @@ kubectl run nginx --image=nginx --restart=Never --port=80
 <details><summary>show</summary>
 <p>
 
-*Note*: The `RESTARTS` column should contain 0 initially (ideally - it could be any number)
+_Note_: The `RESTARTS` column should contain 0 initially (ideally - it could be any number)
 
 ```bash
 # kubectl set image POD/POD_NAME CONTAINER_NAME=IMAGE_NAME:TAG
@@ -200,7 +202,7 @@ kubectl describe po nginx # you will see an event 'Container will be killed and 
 kubectl get po nginx -w # watch it
 ```
 
-*Note*: some time after changing the image, you should see that the value in the `RESTARTS` column has been increased by 1, because the container has been restarted, as stated in the events shown at the bottom of the `kubectl describe pod` command:
+_Note_: some time after changing the image, you should see that the value in the `RESTARTS` column has been increased by 1, because the container has been restarted, as stated in the events shown at the bottom of the `kubectl describe pod` command:
 
 ```
 Events:
@@ -214,7 +216,7 @@ Events:
   Normal  Started    36s (x2 over 9m43s)  kubelet, node3     Started container pod1
 ```
 
-*Note*: you can check pod's image by running
+_Note_: you can check pod's image by running
 
 ```bash
 kubectl get po nginx -o jsonpath='{.spec.containers[].image}{"\n"}'
@@ -243,7 +245,7 @@ Ryan's Comments: jsonpath is really fun!
 NGINX_IP=$(kubectl get pod nginx -o jsonpath='{.status.podIP}')
 # create a temp busybox pod
 kubectl run busybox --image=busybox --env="NGINX_IP=$NGINX_IP" --rm -it --restart=Never -- sh -c 'wget -O- $NGINX_IP:80'
-``` 
+```
 
 Or just in one line:
 
