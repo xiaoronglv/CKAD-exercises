@@ -322,7 +322,8 @@ kubernetes.io > Documentation > Concepts > Workloads > Workload Resources > [Dep
 > `ports.containerPort` is similar to docker expose, Exposing a port here gives the system additional information about the network connections a container uses, but is primarily informational. Not specifying a port here DOES NOT prevent that port from being exposed.
 > 
 > Any port that is listening on the default "0.0.0.0" address inside a container will be accessible from the network. (亲测是这样的，我的 nginx pod containerPort 是 8080，但是我却可以用 80 端口访问，这让我一度困惑，以为碰到了玄学问题。）
-> 
+> ![image](https://github.com/xiaoronglv/CKAD-exercises/assets/1224077/66ec3849-30a4-46e2-9eaa-ab6aa5369e95)
+
 <details><summary>show</summary>
 <p>
 
