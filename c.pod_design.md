@@ -1025,7 +1025,7 @@ kubernetes.io > Documentation > Tasks > Run Jobs > [Running Automated Tasks with
 
 > ⚠ Question: **Should I manage the cron job in the application code or in the k8s yaml?**
 >
-> Manage cron jobs in application framework
+> Approach1: Manage cron jobs in application framework
 >
 > Tools: whenever, sidekiq-cron, and etc.
 >
@@ -1040,7 +1040,7 @@ kubernetes.io > Documentation > Tasks > Run Jobs > [Running Automated Tasks with
 >
 > - I didn't see any disadvantages.
 >
-> Manage cron jobs in the k8s yaml.
+> Approach2: Manage cron jobs in the k8s yaml.
 >
 > Pros:
 >
