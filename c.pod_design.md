@@ -894,6 +894,8 @@ status: {}
 ### Create the same job, make it run 5 times, one after the other. Verify its status and delete it
 
 > ⚠ Question: what's the purpose of running the job multiple times?
+>
+> Feedback: Both Vincent@Goat and Felix@Amazon think the completion parameter is useless for web applications.
 <details><summary>show</summary>
 <p>
 
