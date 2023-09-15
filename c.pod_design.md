@@ -1,9 +1,10 @@
 ![](https://gaforgithub.azurewebsites.net/api?repo=CKAD-exercises/pod_design&empty)
+
 # Pod design (20%)
 
 [Labels And Annotations](#labels-and-annotations) ✅
 
-[Pod Placement](#pod-placement)  ✅
+[Pod Placement](#pod-placement) ✅
 
 [Deployments](#deployments) ✅
 
@@ -12,6 +13,7 @@
 [Cron Jobs](#cron-jobs) ✅
 
 ## Labels and Annotations
+
 kubernetes.io > Documentation > Concepts > Overview > Working with Kubernetes Objects > [Labels and Selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors)
 
 ### Create 3 pods with names nginx1,nginx2,nginx3. All of them should have the label app=v1
@@ -84,7 +86,7 @@ kubectl get po --selector=app=v2
 </p>
 </details>
 
-### Add a new label tier=web to all pods having 'app=v2' or 'app=v1' labels  
+### Add a new label tier=web to all pods having 'app=v2' or 'app=v1' labels
 
 <details><summary>show</summary>
 <p>
@@ -92,11 +94,11 @@ kubectl get po --selector=app=v2
 ```bash
 kubectl label po -l "app in(v1,v2)" tier=web
 ```
+
 </p>
 </details>
 
-
-### Add an annotation 'owner: marketing' to all pods having 'app=v2' label 
+### Add an annotation 'owner: marketing' to all pods having 'app=v2' label
 
 <details><summary>show</summary>
 <p>
@@ -104,10 +106,11 @@ kubectl label po -l "app in(v1,v2)" tier=web
 ```bash
 kubectl annotate po -l "app=v2" owner=marketing
 ```
+
 </p>
 </details>
 
-### Remove the 'app' label from the pods we created before 
+### Remove the 'app' label from the pods we created before
 
 <details><summary>show</summary>
 <p>
@@ -127,7 +130,6 @@ kubectl label po -l app app-
 
 <details><summary>show</summary>
 <p>
-
 
 ```bash
 kubectl annotate po nginx1 nginx2 nginx3 description='my description'
@@ -259,6 +261,7 @@ kubectl describe node node1 # view the taints on a node
 ```
 
 And to tolerate the taint:
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -266,13 +269,13 @@ metadata:
   name: frontend
 spec:
   containers:
-  - name: nginx
-    image: nginx
+    - name: nginx
+      image: nginx
   tolerations:
-  - key: "tier"
-    operator: "Equal"
-    value: "frontend"
-    effect: "NoSchedule"
+    - key: "tier"
+      operator: "Equal"
+      value: "frontend"
+      effect: "NoSchedule"
 ```
 
 </p>
@@ -299,9 +302,9 @@ spec:
   nodeSelector:
     kubernetes.io/hostname: controlplane
   tolerations:
-  - key: "node-role.kubernetes.io/control-plane"
-    operator: "Exists"
-    effect: "NoSchedule"
+    - key: "node-role.kubernetes.io/control-plane"
+      operator: "Exists"
+      effect: "NoSchedule"
 ```
 
 ```bash
@@ -315,12 +318,12 @@ kubectl create -f pod.yaml
 
 kubernetes.io > Documentation > Concepts > Workloads > Workload Resources > [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment)
 
-### Create a deployment with image nginx:1.18.0, called nginx, having 2 replicas, defining port 80 as the port that this container exposes (don't create a service for this deployment)  (🔴 x 1)
+### Create a deployment with image nginx:1.18.0, called nginx, having 2 replicas, defining port 80 as the port that this container exposes (don't create a service for this deployment) (🔴 x 1)
 
 > ⚠ Biggest takeaway: ports.containerPort is informational.
-> 
+>
 > `ports.containerPort` is similar to docker expose, Exposing a port here gives the system additional information about the network connections a container uses, but is primarily informational. Not specifying a port here DOES NOT prevent that port from being exposed.
-> 
+>
 > Any port that is listening on the default "0.0.0.0" address inside a container will be accessible from the network. (亲测是这样的，我的 nginx pod containerPort 是 8080，但是我却可以用 80 端口访问，这让我一度困惑，以为碰到了玄学问题。）
 > ![image](https://github.com/xiaoronglv/CKAD-exercises/assets/1224077/66ec3849-30a4-46e2-9eaa-ab6aa5369e95)
 
@@ -344,6 +347,7 @@ kubectl create deployment nginx  --image=nginx:1.18.0  --dry-run=client -o yaml 
 ```
 
 or,
+
 ```bash
 kubectl create deploy nginx --image=nginx:1.18.0 --replicas=2 --port=80
 ```
@@ -396,7 +400,7 @@ kubectl get po nginx-7bf7478b77-gjzp8 -o yaml
 </p>
 </details>
 
-### Check how the deployment rollout is going  (🔴 x 1)
+### Check how the deployment rollout is going (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -439,7 +443,7 @@ kubectl get po
 </p>
 </details>
 
-### Undo the latest rollout and verify that new pods have the old image (nginx:1.18.0)  (🔴 x 1)
+### Undo the latest rollout and verify that new pods have the old image (nginx:1.18.0) (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -470,7 +474,7 @@ kubectl edit deploy nginx
 </p>
 </details>
 
-### Verify that something's wrong with the rollout  (🔴 x 1)
+### Verify that something's wrong with the rollout (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -484,8 +488,7 @@ kubectl get po # you'll see 'ErrImagePull' or 'ImagePullBackOff'
 </p>
 </details>
 
-
-### Return the deployment to the second revision (number 2) and verify the image is nginx:1.19.8  (🔴 x 1)
+### Return the deployment to the second revision (number 2) and verify the image is nginx:1.19.8 (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -499,7 +502,7 @@ kubectl rollout status deploy nginx # Everything should be OK
 </p>
 </details>
 
-### Check the details of the fourth revision (number 4)  (🔴 x 1)
+### Check the details of the fourth revision (number 4) (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -542,7 +545,6 @@ kubectl get hpa nginx
 
 </p>
 </details>
-
 
 ### Pause the rollout of the deployment
 
@@ -598,14 +600,16 @@ kubectl delete hpa nginx
 #Or
 kubectl delete deploy/nginx hpa/nginx
 ```
+
 </p>
 </details>
 
 ### Implement canary deployment by running two instances of nginx marked as version=v1 and version=v2 so that the load is balanced at 75%-25% ratio （ 🔴 x 1 ）
 
 > ⚠ 这种实现方式真的是太啰嗦了，给 DevOps 徒增了一堆的工作量
+>
 > 1. 管理多个版本的代码和镜像
-> 2. 多套代码 * 多套数据库 schema = 恐怖的 product ，代码逻辑里要一堆的 if else
+> 2. 多套代码 \* 多套数据库 schema = 恐怖的 product ，代码逻辑里要一堆的 if else
 
 > 所以普通的业务代码的灰度发布，我还是更倾向于用 feature toggle + trunk based flow，只在 application 层面做 canary release。
 >
@@ -615,6 +619,7 @@ kubectl delete deploy/nginx hpa/nginx
 <p>
 
 Deploy 3 replicas of v1:
+
 ```
 apiVersion: apps/v1
 kind: Deployment
@@ -658,6 +663,7 @@ spec:
 ```
 
 Create the service:
+
 ```
 apiVersion: v1
 kind: Service
@@ -676,6 +682,7 @@ spec:
 ```
 
 Test if the deployment was successful from within a Pod:
+
 ```
 # run a wget to the Service my-app-svc
 kubectl run -it --rm --restart=Never busybox --image=gcr.io/google-containers/busybox --command -- wget -qO- my-app-svc
@@ -684,6 +691,7 @@ version-1
 ```
 
 Deploy 1 replica of v2:
+
 ```
 apiVersion: apps/v1
 kind: Deployment
@@ -727,6 +735,7 @@ spec:
 ```
 
 Observe that calling the ip exposed by the service the requests are load balanced across the two versions:
+
 ```
 # run a busyBox pod that will make a wget call to the service my-app-svc and print out the version of the pod it reached.
 kubectl run -it --rm --restart=Never busybox --image=gcr.io/google-containers/busybox -- /bin/sh -c 'while sleep 1; do wget -qO- my-app-svc; done'
@@ -740,6 +749,7 @@ version-1
 ```
 
 If the v2 is stable, scale it up to 4 replicas and shoutdown the v1:
+
 ```
 kubectl scale --replicas=4 deploy my-app-v2
 kubectl delete deploy my-app-v1
@@ -780,6 +790,7 @@ kubectl get po # get the pod name
 kubectl logs pi-**** # get the pi numbers
 kubectl delete job pi
 ```
+
 OR
 
 ```bash
@@ -787,6 +798,7 @@ kubectl get jobs -w # wait till 'SUCCESSFUL' is 1 (will take some time, perl ima
 kubectl logs job/pi
 kubectl delete job pi
 ```
+
 OR
 
 ```bash
@@ -851,6 +863,10 @@ kubectl delete job busybox
 
 ### Create a job but ensure that it will be automatically terminated by kubernetes if it takes more than 30 seconds to execute (🔴 x1)
 
+> ⚠ Biggest takeaway:
+>
+> activeDeadlineSeconds is not for each completion, but for the whole job.
+
 <details><summary>show</summary>
 <p>
 
@@ -888,6 +904,7 @@ spec:
       restartPolicy: OnFailure
 status: {}
 ```
+
 </p>
 </details>
 
@@ -896,6 +913,7 @@ status: {}
 > ⚠ Question: what's the purpose of running the job multiple times?
 >
 > Feedback: Both Vincent@Goat and Felix@Amazon think the completion parameter is useless for web applications.
+
 <details><summary>show</summary>
 <p>
 
@@ -1005,7 +1023,40 @@ kubectl delete job busybox
 
 kubernetes.io > Documentation > Tasks > Run Jobs > [Running Automated Tasks with a CronJob](https://kubernetes.io/docs/tasks/job/automated-tasks-with-cron-jobs/)
 
-### Create a cron job with image busybox that runs on a schedule of "*/1 * * * *" and writes 'date; echo Hello from the Kubernetes cluster' to standard output
+> ⚠ Question: **Should I manage the cron job in the application code or in the k8s yaml?**
+>
+> Manage cron jobs in application framework
+>
+> Tools: whenever, sidekiq-cron, and etc.
+>
+> Pros:
+>
+> - friendly to application developers to manage, especially for junior developers
+> - junior developers don't need to learn k8s
+> - when adding, updating, or deleting a cron job, developers don't need to touch the Infra as Code git repo or reach out to the DevOps.
+> - don't need to mix the business code with the IaC.
+>
+> Cons
+>
+> - I didn't see any disadvantages.
+>
+> Manage cron jobs in the k8s yaml.
+>
+> Pros:
+>
+> - I didn't see any advantages besides the cloud native.
+>
+> Cons:
+>
+> - application developers need to learn the basic concepts of k8s, which is not easy for junior developers.
+> - Usually the business code and IaC are in different repo, so when adding, updating, or deleting a cron job, developers need to touch codes in different repos, which is not convenient.
+>
+> Conclusion with Felix@Amazon and Vincent@Goat:
+>
+> - for cron jobs that relating to the business logic, manage them in the application code. (I think most of the cron jobs are of this type.)
+> - for cron jobs that relating to the infrastructure, manage them in the IaC codebase.
+
+### Create a cron job with image busybox that runs on a schedule of "_/1 _ \* \* \*" and writes 'date; echo Hello from the Kubernetes cluster' to standard output
 
 <details><summary>show</summary>
 <p>
@@ -1024,8 +1075,8 @@ kubectl create cronjob busybox --image=busybox --schedule="*/1 * * * *" -- /bin/
 
 ```bash
 kubectl get po # copy the ID of the pod whose container was just created
-kubectl logs <busybox-***> # you will see the date and message 
-kubectl delete cj busybox --force # cj stands for cronjob and --force to delete immediately 
+kubectl logs <busybox-***> # you will see the date and message
+kubectl delete cj busybox --force # cj stands for cronjob and --force to delete immediately
 ```
 
 </p>
@@ -1057,6 +1108,7 @@ kubectl delete cj busybox
 kubectl create cronjob time-limited-job --image=busybox --restart=Never --dry-run=client --schedule="* * * * *" -o yaml -- /bin/sh -c 'date; echo Hello from the Kubernetes cluster' > time-limited-job.yaml
 vi time-limited-job.yaml
 ```
+
 Add cronjob.spec.startingDeadlineSeconds=17
 
 ```bash
@@ -1101,6 +1153,7 @@ status: {}
 kubectl create cronjob time-limited-job --image=busybox --restart=Never --dry-run=client --schedule="* * * * *" -o yaml -- /bin/sh -c 'date; echo Hello from the Kubernetes cluster' > time-limited-job.yaml
 vi time-limited-job.yaml
 ```
+
 Add cronjob.spec.jobTemplate.spec.activeDeadlineSeconds=12
 
 ```bash
@@ -1144,6 +1197,7 @@ status: {}
 ```bash
 kubectl create job --from=cronjob/sample-cron-job sample-job
 ```
+
 </p>
 </details>
 
@@ -1152,4 +1206,3 @@ This command is particularly useful if:
 - You want to test if the job runs successfully without waiting for its scheduled time.
 - You have made changes and you want to ensure those changes work as expected in a one-off run.
 - There's a specific need to execute the job logic outside its regular schedule.
-
