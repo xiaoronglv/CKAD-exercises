@@ -1,7 +1,8 @@
 ![](https://gaforgithub.azurewebsites.net/api?repo=CKAD-exercises/configuration&empty)
+
 # Configuration (18%)
 
-[ConfigMaps](#configmaps)  ✅
+[ConfigMaps](#configmaps) ✅
 
 [SecurityContext](#securitycontext) ✅
 
@@ -18,6 +19,7 @@
 <br>#Tips, export to variable<br>
 <br>export ns="-n secret-ops"</br>
 <br>export do="--dry-run=client -oyaml"</br>
+
 ## ConfigMaps
 
 kubernetes.io > Documentation > Tasks > Configure Pods and Containers > [Configure a Pod to Use a ConfigMap](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/)
@@ -86,7 +88,7 @@ kubectl get cm configmap3 -o yaml
 </p>
 </details>
 
-### Create and display a configmap from a file, giving the key 'special'  (🔴 x 1)
+### Create and display a configmap from a file, giving the key 'special' (🔴 x 1)
 
 Create the file with
 
@@ -105,10 +107,6 @@ kubectl get cm configmap4 -o yaml
 
 </p>
 </details>
-
-> 2023-07-18 Done
-
-
 
 ### Create a configMap called 'options' with the value var5=val5. Create a new nginx pod that loads the value from variable 'var5' in an env variable called 'option'
 
@@ -189,13 +187,13 @@ status: {}
 
 ```bash
 kubectl create -f pod.yaml
-kubectl exec -it nginx -- env 
+kubectl exec -it nginx -- env
 ```
 
 </p>
 </details>
 
-### Create a configMap 'cmvolume' with values 'var8=val8', 'var9=val9'. Load this as a volume inside an nginx pod on path '/etc/lala'. Create the pod and 'ls' into the '/etc/lala' directory.  (🔴 x 1)
+### Create a configMap 'cmvolume' with values 'var8=val8', 'var9=val9'. Load this as a volume inside an nginx pod on path '/etc/lala'. Create the pod and 'ls' into the '/etc/lala' directory. (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -281,7 +279,6 @@ status: {}
 </p>
 </details>
 
-
 ### Create the YAML for an nginx pod that has the capabilities "NET_ADMIN", "SYS_TIME" added to its single container
 
 <details><summary>show</summary>
@@ -347,21 +344,22 @@ spec:
       requests:
         memory: "256Mi"
         cpu: "100m"
-      limits:    
+      limits:
         memory: "512Mi"
         cpu: "200m"
   dnsPolicy: ClusterFirst
   restartPolicy: Always
 status: {}
-``` 
+```
 
 </p>
 </details>
 
 ## Limit Ranges
+
 kubernetes.io > Documentation > Concepts > Policies > Limit Ranges (https://kubernetes.io/docs/concepts/policy/limit-range/)
 
-### Create a namespace with limit range  (🔴 x 1)
+### Create a namespace with limit range (🔴 x 1)
 
 <details><summary>show</summary>
 <p>
@@ -371,6 +369,7 @@ kubectl create ns one
 ```
 
 vi 1.yaml
+
 ```YAML
 apiVersion: v1
 kind: LimitRange
@@ -389,6 +388,7 @@ spec:
 ```bash
 kubectl apply -f 1.yaml
 ```
+
 </p>
 </details>
 
@@ -400,6 +400,7 @@ kubectl apply -f 1.yaml
 ```bash
 kubectl describe limitrange ns-memory-limit -n one
 ```
+
 </p>
 </details>
 
@@ -409,6 +410,7 @@ kubectl describe limitrange ns-memory-limit -n one
 <p>
 
 vi 2.yaml
+
 ```YAML
 apiVersion: v1
 kind: Pod
@@ -428,16 +430,17 @@ spec:
   dnsPolicy: ClusterFirst
   restartPolicy: Always
 status: {}
-``` 
+```
 
 ```bash
 kubectl apply -f 2.yaml
 ```
+
 </p>
 </details>
 
-
 ## Resource Quotas
+
 kubernetes.io > Documentation > Concepts > Policies > Resource Quotas (https://kubernetes.io/docs/concepts/policy/resource-quotas/)
 
 ### Create ResourceQuota in namespace `one` with hard requests `cpu=1`, `memory=1Gi` and hard limits `cpu=2`, `memory=2Gi`.
@@ -446,11 +449,13 @@ kubernetes.io > Documentation > Concepts > Policies > Resource Quotas (https://k
 <p>
 
 Create the namespace:
+
 ```bash
 kubectl create ns one
 ```
 
 Create the ResourceQuota
+
 ```bash
 vi rq-one.yaml
 ```
@@ -474,9 +479,11 @@ kubectl apply -f rq-one.yaml
 ```
 
 or
+
 ```bash
 kubectl create quota my-rq --namespace=one --hard=requests.cpu=1,requests.memory=1Gi,limits.cpu=2,limits.memory=2Gi
 ```
+
 </p>
 </details>
 
@@ -519,9 +526,11 @@ kubectl create -f pod.yaml
 ```
 
 Expected error message:
+
 ```bash
 Error from server (Forbidden): error when creating "pod.yaml": pods "nginx" is forbidden: exceeded quota: my-rq, requested: limits.cpu=3,limits.memory=4Gi,requests.cpu=2,requests.memory=3Gi, used: limits.cpu=0,limits.memory=0,requests.cpu=0,requests.memory=0, limited: limits.cpu=2,limits.memory=2Gi,requests.cpu=1,requests.memory=1Gi
 ```
+
 </p>
 </details>
 
@@ -564,6 +573,7 @@ kubectl create -f pod2.yaml
 ```
 
 Show the ResourceQuota usage in namespace `one`
+
 ```bash
 kubectl get resourcequota -n one
 ```
@@ -572,9 +582,9 @@ kubectl get resourcequota -n one
 NAME    AGE   REQUEST                                          LIMIT
 my-rq   10m   requests.cpu: 500m/1, requests.memory: 3Mi/1Gi   limits.cpu: 1/2, limits.memory: 4Mi/2Gi
 ```
+
 </p>
 </details>
-
 
 ## Secrets
 
@@ -612,7 +622,7 @@ kubectl create secret generic mysecret2 --from-file=username
 </p>
 </details>
 
-### Get the value of mysecret2 
+### Get the value of mysecret2
 
 > :warning: 2023-07-18 note: kubectl describe mysecret2 doesn't work
 
@@ -750,6 +760,7 @@ k apply -f sc.yaml
 </details>
 
 ### Consuming the Secret. Create a Pod named 'consumer' with the image 'nginx' in the namespace 'secret-ops' and consume the Secret as an environment variable. Then, open an interactive shell to the Pod, and print all environment variables.
+
 <details><summary>show</summary>
 <p>
 
@@ -789,10 +800,12 @@ status: {}
 k exec -it $ns consumer -- /bin/sh
 #env
 ```
+
 </p>
 </details>
 
 ### Create a Secret named 'my-secret' of type 'kubernetes.io/ssh-auth' in the namespace 'secret-ops'. Define a single key named 'ssh-privatekey', and point it to the file 'id_rsa' in this directory.
+
 <details><summary>show</summary>
 <p>
 
@@ -807,10 +820,12 @@ ssh-keygen
 k create secret generic my-secret $ns --type="kubernetes.io/ssh-auth" --from-file=ssh-privatekey=id_rsa $do > sc.yaml
 k apply -f sc.yaml
 ```
+
 </p>
 </details>
 
 ### Create a Pod named 'consumer' with the image 'nginx' in the namespace 'secret-ops', and consume the Secret as Volume. Mount the Secret as Volume to the path /var/app with read-only access. Open an interactive shell to the Pod, and render the contents of the file.
+
 <details><summary>show</summary>
 <p>
 
@@ -855,6 +870,7 @@ k exec -it $ns consumer -- /bin/sh
 # cat /var/app/ssh-privatekey
 # exit
 ```
+
 </p>
 </details>
 
@@ -870,7 +886,8 @@ kubernetes.io > Documentation > Tasks > Configure Pods and Containers > [Configu
 ```bash
 kubectl get sa --all-namespaces
 ```
-Alternatively 
+
+Alternatively
 
 ```bash
 kubectl get sa -A
@@ -972,7 +989,8 @@ kubectl describe pod nginx # will see that a new secret called myuser-token-****
 
 ### Generate an API token for the service account 'myuser' (🔴 x1)
 
-> ⚠️  Stack Overflow: [Service account secret is not listed. How to fix it?](https://kubernetes.io/docs/concepts/configuration/secret/#service-account-token-secrets)
+> ⚠️ Stack Overflow: [Service account secret is not listed. How to fix it?](https://kubernetes.io/docs/concepts/configuration/secret/#service-account-token-secrets)
+
 <details><summary>show</summary>
 <p>
   
