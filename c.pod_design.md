@@ -1056,7 +1056,7 @@ kubernetes.io > Documentation > Tasks > Run Jobs > [Running Automated Tasks with
 > - for cron jobs that relating to the business logic, manage them in the application code. (I think most of the cron jobs are of this type.)
 > - for cron jobs that relating to the infrastructure, manage them in the IaC codebase.
 
-### Create a cron job with image busybox that runs on a schedule of "_/1 _ \* \* \*" and writes 'date; echo Hello from the Kubernetes cluster' to standard output
+### Create a cron job with image busybox that runs on a schedule of `*/1 * * * *` and writes 'date; echo Hello from the Kubernetes cluster' to standard output
 
 <details><summary>show</summary>
 <p>
