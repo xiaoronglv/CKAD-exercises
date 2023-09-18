@@ -604,16 +604,18 @@ kubectl delete deploy/nginx hpa/nginx
 </p>
 </details>
 
-### Implement canary deployment by running two instances of nginx marked as version=v1 and version=v2 so that the load is balanced at 75%-25% ratio （ 🔴 x 1 ）
+### Implement canary deployment by running two instances of nginx marked as version=v1 and version=v2 so that the load is balanced at 75%-25% ratio （ 非常不想学， but ⭐⭐⭐⭐⭐ 必考 ）
 
+> [reddit](https://www.reddit.com/r/kubernetes/comments/12s5rxf/how_to_practice_real_exam_questions_for_ckad/) 上说，这道题还是必考题目，所以还是要掌握的。
+>
 > ⚠ 这种实现方式真的是太啰嗦了，给 DevOps 徒增了一堆的工作量
 >
 > 1. 管理多个版本的代码和镜像
 > 2. 多套代码 \* 多套数据库 schema = 恐怖的 product ，代码逻辑里要一堆的 if else
 
-> 所以普通的业务代码的灰度发布，我还是更倾向于用 feature toggle + trunk based flow，只在 application 层面做 canary release。
+> 所以普通的业务代码的灰度发布，我还是更倾向于用 feature toggle + trunk based flow，只在 application 层面做 canary release。 只有一些极端 Infra 升级，可以考虑有这种方式，比如 Rails，Ruby，Python，Django。
 >
-> 对于框架的升级，无法用 feature toggle，比如 Rails，Ruby，Python，Django，可以考虑用 Canary release 降低风险。
+> 通过深入的学习，就知道这种设计很垃圾，千万不要在生产环境尝试。
 
 <details><summary>show</summary>
 <p>

@@ -1,7 +1,10 @@
 ![](https://gaforgithub.azurewebsites.net/api?repo=CKAD-exercises/services&empty)
+
 # Services and Networking (13%)
 
 ### Create a pod with image nginx called nginx and expose its port 80
+
+> hint: you can expose it directly when creating the pod
 
 <details><summary>show</summary>
 <p>
@@ -13,7 +16,6 @@ kubectl run nginx --image=nginx --restart=Never --port=80 --expose
 
 </p>
 </details>
-
 
 ### Confirm that ClusterIP has been created. Also check endpoints
 
@@ -29,6 +31,8 @@ kubectl get ep # endpoints
 </details>
 
 ### Get service's ClusterIP, create a temp busybox pod and 'hit' that IP with wget
+
+> hint: `--rm` only works with `-it`
 
 <details><summary>show</summary>
 <p>
@@ -75,9 +79,9 @@ metadata:
 spec:
   clusterIP: 10.97.242.220
   ports:
-  - port: 80
-    protocol: TCP
-    targetPort: 80
+    - port: 80
+      protocol: TCP
+      targetPort: 80
   selector:
     run: nginx
   sessionAffinity: None
@@ -89,7 +93,7 @@ status:
 or
 
 ```bash
-kubectl patch svc nginx -p '{"spec":{"type":"NodePort"}}' 
+kubectl patch svc nginx -p '{"spec":{"type":"NodePort"}}'
 ```
 
 ```bash
@@ -112,6 +116,7 @@ wget -O- NODE_IP:31931 # if you're using Kubernetes with Docker for Windows/Mac,
 kubectl delete svc nginx # Deletes the service
 kubectl delete pod nginx # Deletes the pod
 ```
+
 </p>
 </details>
 
@@ -124,6 +129,7 @@ kubectl delete pod nginx # Deletes the pod
 kubectl create deploy foo --image=dgkanatsios/simpleapp --port=8080 --replicas=3
 kubectl label deployment foo --overwrite app=foo #This is optional since kubectl create deploy foo will create label app=foo by default
 ```
+
 </p>
 </details>
 
@@ -131,7 +137,6 @@ kubectl label deployment foo --overwrite app=foo #This is optional since kubectl
 
 <details><summary>show</summary>
 <p>
-
 
 ```bash
 kubectl get pods -l app=foo -o wide # 'wide' will show pod IPs
@@ -150,14 +155,16 @@ kubectl get po -l app=foo -o jsonpath='{range .items[*]}{.status.podIP}{"\n"}{en
 
 ### Create a service that exposes the deployment on port 6262. Verify its existence, check the endpoints
 
-Faild 🔴 x 1 I forgot to add the target port
+> questions:
+>
+> - what's the difference between port and tagetPort?
+> - Does pod has logical port?
 
 <details><summary>show</summary>
 <p>
 
-
 ```bash
-kubectl expose deploy foo --port=6262 --target-port=8080   
+kubectl expose deploy foo --port=6262 --target-port=8080
 kubectl get service foo # you will see ClusterIP as well as port 6262
 kubectl get endpoints foo # you will see the IPs of the three replica pods, listening on port 8080
 ```
@@ -165,8 +172,11 @@ kubectl get endpoints foo # you will see the IPs of the three replica pods, list
 </p>
 </details>
 
-
 ### Create a temp busybox pod and connect via wget to foo service. Verify that each time there's a different hostname returned. Delete deployment and services to cleanup the cluster
+
+> questions:
+>
+> - curl doesn't exist in busybox
 
 <details><summary>show</summary>
 <p>
@@ -188,8 +198,8 @@ kubectl delete deploy foo
 
 kubernetes.io > Documentation > Concepts > Services, Load Balancing, and Networking > [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 
-> Note that network policies may not be enforced by default, depending on your k8s implementation. E.g. Azure AKS by default won't have policy enforcement, the cluster must be created with an explicit support for `netpol` https://docs.microsoft.com/en-us/azure/aks/use-network-policies#overview-of-network-policy  
-  
+> Note that network policies may not be enforced by default, depending on your k8s implementation. E.g. Azure AKS by default won't have policy enforcement, the cluster must be created with an explicit support for `netpol` https://docs.microsoft.com/en-us/azure/aks/use-network-policies#overview-of-network-policy
+
 <details><summary>show</summary>
 <p>
 
@@ -232,3 +242,20 @@ kubectl run busybox --image=busybox --rm -it --restart=Never --labels=access=gra
 
 </p>
 </details>
+
+### Questions from Ryan
+
+**Can two applications share one clusterIP with different ports?**
+
+No, they can't.
+
+```
+controlplane ~ ➜  k get services
+NAME         TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+kubernetes   ClusterIP   10.43.0.1       <none>        443/TCP    48m
+foo          ClusterIP   10.43.203.109   <none>        6262/TCP   23m
+nginx        ClusterIP   10.43.12.243    <none>        80/TCP     7m51s
+
+controlplane ~ ➜  k expose deployment foo --cluster-ip=10.43.12.243 --port=8181 --target-port=8080
+The Service "foo" is invalid: spec.clusterIPs: Invalid value: []string{"10.43.12.243"}: failed to allocate IP 10.43.12.243: provided IP is already allocated
+```
