@@ -247,6 +247,8 @@ kubernetes.io > Documentation > Tasks > Configure Pods and Containers > [Configu
 
 ### Create the YAML for an nginx pod that runs with the user ID 101. No need to create the pod
 
+> ⚠ question: what does user ID 101 mean?
+
 <details><summary>show</summary>
 <p>
 
@@ -592,6 +594,29 @@ kubernetes.io > Documentation > Concepts > Configuration > [Secrets](https://kub
 
 kubernetes.io > Documentation > Tasks > Inject Data Into Applications > [Distribute Credentials Securely Using Secrets](https://kubernetes.io/docs/tasks/inject-data-application/distribute-credentials-secure/)
 
+> ⚠ Question not answered: what's the best way to follow the 12-factors app methodology and org
+>
+> option1: create different secret for different key. This way you can update a single key without having to update the whole secret
+>
+> Pros:
+>
+> - only one functon will be affected when you make a mistake in the secret
+>
+> Cons
+>
+> - need to create different secrets for difference keys, it's verbose.
+>
+> option2: create a secret for each environment. This way you can update the whole secret when you need to update a single key.
+>
+> Pros:
+>
+> - easy to manage all secrets for a single environment
+>
+> Cons:
+>
+> - It might be a problem if you have a lot of keys in the secret.
+> - prone to make mistakes when updating one key.
+
 ### Create a secret called mysecret with the values password=mypass
 
 <details><summary>show</summary>
@@ -624,7 +649,7 @@ kubectl create secret generic mysecret2 --from-file=username
 
 ### Get the value of mysecret2
 
-> :warning: 2023-07-18 note: kubectl describe mysecret2 doesn't work
+> :warning: The value is encoded, you can't get the value though kubectl describe mysecret2, use the base64 command to decode it.
 
 <details><summary>show</summary>
 <p>
@@ -804,7 +829,14 @@ k exec -it $ns consumer -- /bin/sh
 </p>
 </details>
 
-### Create a Secret named 'my-secret' of type 'kubernetes.io/ssh-auth' in the namespace 'secret-ops'. Define a single key named 'ssh-privatekey', and point it to the file 'id_rsa' in this directory.
+### Create a Secret named 'my-secret' of type 'kubernetes.io/ssh-auth' in the namespace 'secret-ops'. Define a single key named 'ssh-privatekey' (in the newly created secret), and point it to the file 'id_rsa' in this directory. (🔴🔴 全是坑)
+
+> ⚠ Questions:
+>
+> - how to create a pair of ssh keys?
+> - `k create secret kubernetes.io/ssh-auth my-secret --from-file=ssh-privatekey=id_rsa` doesn't work, it says `error: unknown flag: --from-file`
+> - what's the difference between type `kubernetes.io/ssh-auth` and `generic`?
+> - is `kuberentes.io/ssh-auth` a special type?
 
 <details><summary>show</summary>
 <p>
@@ -824,7 +856,7 @@ k apply -f sc.yaml
 </p>
 </details>
 
-### Create a Pod named 'consumer' with the image 'nginx' in the namespace 'secret-ops', and consume the Secret as Volume. Mount the Secret as Volume to the path /var/app with read-only access. Open an interactive shell to the Pod, and render the contents of the file.
+### Create a Pod named 'consumer' with the image 'nginx' in the namespace 'secret-ops', and consume the Secret as Volume. Mount the Secret as Volume to the path `/var/app`` with read-only access. Open an interactive shell to the Pod, and render the contents of the file.
 
 <details><summary>show</summary>
 <p>
