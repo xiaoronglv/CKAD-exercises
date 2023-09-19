@@ -59,6 +59,9 @@ kubectl run busybox --rm --image=busybox -it --restart=Never --env="IP=$IP" -- w
 
 ### Convert the ClusterIP to NodePort for the same service and find the NodePort port. Hit service using Node's IP. Delete the service and the pod at the end.
 
+> 💡 questions: what's the difference between nodePort, port and targetPort?>
+> [https://stackoverflow.com/a/63072588/5117552](https://stackoverflow.com/a/63072588/5117552)
+
 <details><summary>show</summary>
 <p>
 
