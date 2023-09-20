@@ -2,15 +2,18 @@
 
 - Note: CRD is part of the new CKAD syllabus. Here are a few examples of installing custom resource into the Kubernetes API by creating a CRD.
 
+> Ryan's note: In this place the operator resouce is a person, not the kubernetes operator.
+
 ## CRD in K8s
 
 ### Create a CustomResourceDefinition manifest file for an Operator with the following specifications :
-* *Name* : `operators.stable.example.com`
-* *Group* : `stable.example.com`
-* *Schema*: `<email: string><name: string><age: integer>`
-* *Scope*: `Namespaced`
-* *Names*: `<plural: operators><singular: operator><shortNames: op>`
-* *Kind*: `Operator`
+
+- _Name_ : `operators.stable.example.com`
+- _Group_ : `stable.example.com`
+- _Schema_: `<email: string><name: string><age: integer>`
+- _Scope_: `Namespaced`
+- _Names_: `<plural: operators><singular: operator><shortNames: op>`
+- _Kind_: `Operator`
 
 <details><summary>show</summary>
 <p>
@@ -48,7 +51,7 @@ spec:
     # kind is normally the CamelCased singular type. Your resource manifests use this.
     kind: Operator
     shortNames:
-    - op
+      - op
 ```
 
 </p>
@@ -68,12 +71,12 @@ kubectl apply -f operator-crd.yml
 
 ### Create custom object from the CRD
 
-* *Name* : `operator-sample`
-* *Kind*: `Operator`
-* Spec:
-  * email: `operator-sample@stable.example.com`
-  * name: `operator sample`
-  * age: `30`
+- _Name_ : `operator-sample`
+- _Kind_: `Operator`
+- Spec:
+  - email: `operator-sample@stable.example.com`
+  - name: `operator sample`
+  - age: `30`
 
 <details><summary>show</summary>
 <p>
