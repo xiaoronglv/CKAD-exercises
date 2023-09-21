@@ -1,7 +1,8 @@
 ![](https://gaforgithub.azurewebsites.net/api?repo=CKAD-exercises/multi_container&empty)
+
 # Multi-container Pods (10%)
 
-### Create a Pod with two containers, both with image busybox and command "echo hello; sleep 3600". Connect to the second container and run 'ls'  (🔴 x 1)
+### Create a Pod with two containers, both with image busybox and command "echo hello; sleep 3600". Connect to the second container and run 'ls'
 
 <details><summary>show</summary>
 <p>
@@ -104,27 +105,27 @@ metadata:
     run: box
   name: box
 spec:
-  initContainers: 
-  - args: 
-    - /bin/sh 
-    - -c 
+  initContainers:
+  - args:
+    - /bin/sh
+    - -c
     - "wget -O /work-dir/index.html http://neverssl.com/online"
-    image: busybox 
-    name: box 
-    volumeMounts: 
-    - name: vol 
-      mountPath: /work-dir 
+    image: busybox
+    name: box
+    volumeMounts:
+    - name: vol
+      mountPath: /work-dir
   containers:
   - image: nginx
     name: nginx
     ports:
     - containerPort: 80
-    volumeMounts: 
-    - name: vol 
-      mountPath: /usr/share/nginx/html 
-  volumes: 
-  - name: vol 
-    emptyDir: {} 
+    volumeMounts:
+    - name: vol
+      mountPath: /usr/share/nginx/html
+  volumes:
+  - name: vol
+    emptyDir: {}
 ```
 
 ```bash
@@ -143,4 +144,3 @@ kubectl delete po box
 
 </p>
 </details>
-

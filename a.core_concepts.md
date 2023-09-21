@@ -190,7 +190,7 @@ kubectl run nginx --image=nginx --restart=Never --port=80
 </p>
 </details>
 
-### Change pod's image to nginx:1.7.1. Observe that the container will be restarted as soon as the image gets pulled (🔴 x 1)
+### Change pod's image to nginx:1.7.1. Observe that the container will be restarted as soon as the image gets pulled
 
 <details><summary>show</summary>
 <p>
@@ -239,8 +239,6 @@ kubectl run busybox --image=busybox --rm -it --restart=Never -- wget -O- 10.1.1.
 ```
 
 Alternatively you can also try a more advanced option:
-
-Ryan's Comments: jsonpath is really fun!
 
 ```bash
 # Get IP of the nginx pod
@@ -300,7 +298,7 @@ kubectl logs nginx
 </p>
 </details>
 
-### If pod crashed and restarted, get logs about the previous instance (🔴 x 1)
+### If pod crashed and restarted, get logs about the previous instance
 
 <details><summary>show</summary>
 <p>
@@ -314,7 +312,7 @@ kubectl logs nginx --previous
 </p>
 </details>
 
-### Execute a simple shell on the nginx pod (🔴 x 1)
+### Execute a simple shell on the nginx pod
 
 <details><summary>show</summary>
 <p>

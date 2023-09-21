@@ -17,8 +17,11 @@
 [Service Accounts](#serviceaccounts) ✅
 
 <br>#Tips, export to variable<br>
-<br>export ns="-n secret-ops"</br>
-<br>export do="--dry-run=client -oyaml"</br>
+
+```
+export ns="-n secret-ops"
+export do="  --dry-run=client -output=yaml "
+```
 
 ## ConfigMaps
 
@@ -447,7 +450,51 @@ kubernetes.io > Documentation > Concepts > Policies > Resource Quotas (https://k
 
 ### Create ResourceQuota in namespace `one` with hard requests `cpu=1`, `memory=1Gi` and hard limits `cpu=2`, `memory=2Gi`.
 
+> ⚠ question: what's the difference between the following items?
+>
+> - `spec.hard.cpu`
+> - `spec.hard.limits.cpu`
+> - `spec.hard.requests.cpu`
+>
+> Example 1
+>
+> ```
+> apiVersion: v1
+> kind: ResourceQuota
+> metadata:
+>   creationTimestamp: null
+>   name: myquota
+> spec:
+>   hard:
+>     cpu: "1"   #### look at this 💩!
+>                #### The API is really badly designed.
+>                #### when people use it, they don't know what it means.
+>                #### It's not intuitive at all.
+>     memory: 1Gi
+> status: {}
+> ```
+>
+> Example 2
+>
+> ```
+> apiVersion: v1
+> kind: ResourceQuota
+> metadata:
+>   creationTimestamp: null
+>   name: myquota
+> spec:
+>   hard:
+>     request.cpu: "1"  #### look at the straightforward way! 👍
+>     request.memory: 1Gi
+> status: {}
+> ```
+
 <details><summary>show</summary>
+
+Reference: [Compute Resource Quota](https://kubernetes.io/docs/concepts/policy/resource-quotas/#compute-resource-quota)
+
+<img src="https://user-images.githubusercontent.com/1224077/269477531-4961a358-464a-4d41-b3b0-edc16693cab7.png">
+
 <p>
 
 Create the namespace:

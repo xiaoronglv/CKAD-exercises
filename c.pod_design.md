@@ -318,9 +318,9 @@ kubectl create -f pod.yaml
 
 kubernetes.io > Documentation > Concepts > Workloads > Workload Resources > [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment)
 
-### Create a deployment with image nginx:1.18.0, called nginx, having 2 replicas, defining port 80 as the port that this container exposes (don't create a service for this deployment) (🔴 x 1)
+### Create a deployment with image nginx:1.18.0, called nginx, having 2 replicas, defining port 80 as the port that this container exposes (don't create a service for this deployment)
 
-> ⚠ Biggest takeaway: ports.containerPort is informational.
+> ⚠ Biggest takeaway: <span style="color:red"> ports.containerPort is informational. </span>
 >
 > `ports.containerPort` is similar to docker expose, Exposing a port here gives the system additional information about the network connections a container uses, but is primarily informational. Not specifying a port here DOES NOT prevent that port from being exposed.
 >
@@ -400,7 +400,7 @@ kubectl get po nginx-7bf7478b77-gjzp8 -o yaml
 </p>
 </details>
 
-### Check how the deployment rollout is going (🔴 x 1)
+### Check how the deployment rollout is going
 
 <details><summary>show</summary>
 <p>
@@ -443,7 +443,7 @@ kubectl get po
 </p>
 </details>
 
-### Undo the latest rollout and verify that new pods have the old image (nginx:1.18.0) (🔴 x 1)
+### Undo the latest rollout and verify that new pods have the old image (nginx:1.18.0)
 
 <details><summary>show</summary>
 <p>
@@ -474,7 +474,7 @@ kubectl edit deploy nginx
 </p>
 </details>
 
-### Verify that something's wrong with the rollout (🔴 x 1)
+### Verify that something's wrong with the rollout
 
 <details><summary>show</summary>
 <p>
@@ -488,7 +488,7 @@ kubectl get po # you'll see 'ErrImagePull' or 'ImagePullBackOff'
 </p>
 </details>
 
-### Return the deployment to the second revision (number 2) and verify the image is nginx:1.19.8 (🔴 x 1)
+### Return the deployment to the second revision (number 2) and verify the image is nginx:1.19.8
 
 <details><summary>show</summary>
 <p>
@@ -502,7 +502,7 @@ kubectl rollout status deploy nginx # Everything should be OK
 </p>
 </details>
 
-### Check the details of the fourth revision (number 4) (🔴 x 1)
+### Check the details of the fourth revision (number 4)
 
 <details><summary>show</summary>
 <p>
@@ -528,7 +528,7 @@ kubectl describe deploy nginx
 </p>
 </details>
 
-### Autoscale the deployment, pods between 5 and 10, targetting CPU utilization at 80% (🔴 x 1)
+### Autoscale the deployment, pods between 5 and 10, targetting CPU utilization at 80%
 
 > ⚠ 这个功能很棒啊，我以前都没有留意到过！这个应用价值很大！
 >
@@ -863,9 +863,9 @@ kubectl delete job busybox
 </p>
 </details>
 
-### Create a job but ensure that it will be automatically terminated by kubernetes if it takes more than 30 seconds to execute (🔴 x1)
+### Create a job but ensure that it will be automatically terminated by kubernetes if it takes more than 30 seconds to execute
 
-> ⚠ Biggest takeaway:
+> ⚠ Takeaway:
 >
 > activeDeadlineSeconds is not for each completion, but for the whole job.
 
@@ -1103,6 +1103,8 @@ kubectl delete cj busybox
 
 ### Create a cron job with image busybox that runs every minute and writes 'date; echo Hello from the Kubernetes cluster' to standard output. The cron job should be terminated if it takes more than 17 seconds to start execution after its scheduled time (i.e. the job missed its scheduled time).
 
+> checkpoint: <span style="color:red"> please put the parameter to the right level, otherwise it won't work. </span>
+
 <details><summary>show</summary>
 <p>
 
@@ -1147,6 +1149,9 @@ status: {}
 </details>
 
 ### Create a cron job with image busybox that runs every minute and writes 'date; echo Hello from the Kubernetes cluster' to standard output. The cron job should be terminated if it successfully starts but takes more than 12 seconds to complete execution.
+
+> checkpoint: some parameters belong to job, some belongs to cronjob.
+> <span style="color:red"> Please put them to the right level, otherwise it won't work. </span>
 
 <details><summary>show</summary>
 <p>
@@ -1193,6 +1198,12 @@ status: {}
 
 ### Create a job from cronjob.
 
+> Takeaway: this command is particularly useful if:
+>
+> - You want to test if the job runs successfully without waiting for its scheduled time.
+> - You have made changes and you want to ensure those changes work as expected in a one-off run.
+> - There's a specific need to execute the job logic outside its regular schedule.
+
 <details><summary>show</summary>
 <p>
 
@@ -1202,9 +1213,3 @@ kubectl create job --from=cronjob/sample-cron-job sample-job
 
 </p>
 </details>
-
-This command is particularly useful if:
-
-- You want to test if the job runs successfully without waiting for its scheduled time.
-- You have made changes and you want to ensure those changes work as expected in a one-off run.
-- There's a specific need to execute the job logic outside its regular schedule.
