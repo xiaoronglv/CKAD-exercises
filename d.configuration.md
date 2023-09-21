@@ -466,7 +466,7 @@ kubernetes.io > Documentation > Concepts > Policies > Resource Quotas (https://k
 >   name: myquota
 > spec:
 >   hard:
->     cpu: "1"   #### look at this 💩!
+>     cpu: "1"   #### look at this 💩···!
 >                #### The API is really badly designed.
 >                #### when people use it, they don't know what it means.
 >                #### It's not intuitive at all.
