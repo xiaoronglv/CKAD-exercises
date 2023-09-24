@@ -2,7 +2,7 @@
 
 # Services and Networking (13%)
 
-### Create a pod with image nginx called nginx and expose its port 80
+**Create a pod with image nginx called nginx and expose its port 80**
 
 > hint: you can expose it directly when creating the pod
 
@@ -17,7 +17,7 @@ kubectl run nginx --image=nginx --restart=Never --port=80 --expose
 </p>
 </details>
 
-### Confirm that ClusterIP has been created. Also check endpoints
+**Confirm that ClusterIP has been created. Also check endpoints**
 
 <details><summary>show</summary>
 <p>
@@ -30,7 +30,7 @@ kubectl get ep # endpoints
 </p>
 </details>
 
-### Get service's ClusterIP, create a temp busybox pod and 'hit' that IP with wget
+**Get service's ClusterIP, create a temp busybox pod and 'hit' that IP with wget**
 
 > hint: `--rm` only works with `-it`
 
@@ -57,7 +57,7 @@ kubectl run busybox --rm --image=busybox -it --restart=Never --env="IP=$IP" -- w
 </p>
 </details>
 
-### Convert the ClusterIP to NodePort for the same service and find the NodePort port. Hit service using Node's IP. Delete the service and the pod at the end.
+**Convert the ClusterIP to NodePort for the same service and find the NodePort port. Hit service using Node's IP. Delete the service and the pod at the end.**
 
 > 💡 questions: what's the difference between nodePort, port and targetPort?>
 > [https://stackoverflow.com/a/63072588/5117552](https://stackoverflow.com/a/63072588/5117552)
@@ -123,7 +123,7 @@ kubectl delete pod nginx # Deletes the pod
 </p>
 </details>
 
-### Create a deployment called foo using image 'dgkanatsios/simpleapp' (a simple server that returns hostname) and 3 replicas. Label it as 'app=foo'. Declare that containers in this pod will accept traffic on port 8080 (do NOT create a service yet)
+**Create a deployment called foo using image 'dgkanatsios/simpleapp' (a simple server that returns hostname) and 3 replicas. Label it as 'app=foo'. Declare that containers in this pod will accept traffic on port 8080 (do NOT create a service yet)**
 
 <details><summary>show</summary>
 <p>
@@ -136,7 +136,7 @@ kubectl label deployment foo --overwrite app=foo #This is optional since kubectl
 </p>
 </details>
 
-### Get the pod IPs. Create a temp busybox pod and try hitting them on port 8080
+**Get the pod IPs. Create a temp busybox pod and try hitting them on port 8080**
 
 <details><summary>show</summary>
 <p>
@@ -156,7 +156,7 @@ kubectl get po -l app=foo -o jsonpath='{range .items[*]}{.status.podIP}{"\n"}{en
 </p>
 </details>
 
-### Create a service that exposes the deployment on port 6262. Verify its existence, check the endpoints
+**Create a service that exposes the deployment on port 6262. Verify its existence, check the endpoints**
 
 > questions:
 >
@@ -175,7 +175,7 @@ kubectl get endpoints foo # you will see the IPs of the three replica pods, list
 </p>
 </details>
 
-### Create a temp busybox pod and connect via wget to foo service. Verify that each time there's a different hostname returned. Delete deployment and services to cleanup the cluster
+**Create a temp busybox pod and connect via wget to foo service. Verify that each time there's a different hostname returned. Delete deployment and services to cleanup the cluster**
 
 > questions:
 >
@@ -197,7 +197,7 @@ kubectl delete deploy foo
 </p>
 </details>
 
-### Create an nginx deployment of 2 replicas, expose it via a ClusterIP service on port 80. Create a NetworkPolicy so that only pods with labels 'access: granted' can access the deployment and apply it
+**Create an nginx deployment of 2 replicas, expose it via a ClusterIP service on port 80. Create a NetworkPolicy so that only pods with labels 'access: granted' can access the deployment and apply it**
 
 kubernetes.io > Documentation > Concepts > Services, Load Balancing, and Networking > [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 
