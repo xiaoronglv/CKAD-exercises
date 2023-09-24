@@ -903,7 +903,7 @@ k apply -f sc.yaml
 </p>
 </details>
 
-**Create a Pod named 'consumer' with the image 'nginx' in the namespace 'secret-ops', and consume the Secret as Volume. Mount the Secret as Volume to the path `/var/app`` with read-only access. Open an interactive shell to the Pod, and render the contents of the file.**
+**Create a Pod named 'consumer' with the image 'nginx' in the namespace `secret-ops`, and consume the Secret as Volume. Mount the Secret as Volume to the path `/var/app` with read-only access. Open an interactive shell to the Pod, and render the contents of the file.**
 
 <details><summary>show</summary>
 <p>
