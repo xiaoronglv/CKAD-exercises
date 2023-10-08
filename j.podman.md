@@ -4,7 +4,7 @@
 
 ## Podman basics
 
-### Create a Dockerfile to deploy an Apache HTTP Server which hosts a custom main page
+**Create a Dockerfile to deploy an Apache HTTP Server which hosts a custom main page**
 
 <details><summary>show</summary>
 <p>
@@ -17,7 +17,7 @@ RUN echo "Hello, World!" > /usr/local/apache2/htdocs/index.html
 </p>
 </details>
 
-### Build and see how many layers the image consists of
+**Build and see how many layers the image consists of**
 
 <details><summary>show</summary>
 <p>
@@ -78,7 +78,7 @@ Hello, World!
 </p>
 </details>
 
-### Run a command inside the pod to print out the index.html file
+**Run a command inside the pod to print out the index.html file**
 
 <details><summary>show</summary>
 <p>
@@ -87,10 +87,11 @@ Hello, World!
 :~$ podman exec -it test cat /usr/local/apache2/htdocs/index.html
 Hello, World!
 ```
+
 </p>
 </details>
 
-### Tag the image with ip and port of a private local registry and then push the image to this registry
+**Tag the image with ip and port of a private local registry and then push the image to this registry**
 
 <details><summary>show</summary>
 <p>
@@ -106,7 +107,7 @@ Hello, World!
 </p>
 </details>
 
- Verify that the registry contains the pushed image and that you can pull it
+Verify that the registry contains the pushed image and that you can pull it
 
 <details><summary>show</summary>
 <p>
@@ -136,7 +137,7 @@ ef4b14a72d02ae0577eb0632d084c057777725c279e12ccf5b0c6e4ff5fd598b
 </p>
 </details>
 
-### Run a pod with the image pushed to the registry
+**Run a pod with the image pushed to the registry**
 
 <details><summary>show</summary>
 <p>
@@ -151,8 +152,7 @@ Hello, World!
 </p>
 </details>
 
-### Log into a remote registry server and then read the credentials from the default file
-
+**Log into a remote registry server and then read the credentials from the default file**
 
 <details><summary>show</summary>
 <p>
@@ -174,7 +174,7 @@ Hello, World!
 </p>
 </details>
 
-### Create a secret both from existing login credentials and from the CLI
+**Create a secret both from existing login credentials and from the CLI**
 
 <details><summary>show</summary>
 <p>
@@ -189,7 +189,7 @@ secret/mysecret2 created
 </p>
 </details>
 
-### Create the manifest for a Pod that uses one of the two secrets just created to pull an image hosted on the relative private remote registry
+**Create the manifest for a Pod that uses one of the two secrets just created to pull an image hosted on the relative private remote registry**
 
 <details><summary>show</summary>
 <p>
@@ -201,16 +201,16 @@ metadata:
   name: private-reg
 spec:
   containers:
-  - name: private-reg-container
-    image: $YOUR_PRIVATE_IMAGE
+    - name: private-reg-container
+      image: $YOUR_PRIVATE_IMAGE
   imagePullSecrets:
-  - name: mysecret
+    - name: mysecret
 ```
 
 </p>
 </details>
 
-### Clean up all the images and containers
+**Clean up all the images and containers**
 
 <details><summary>show</summary>
 <p>

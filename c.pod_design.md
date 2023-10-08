@@ -16,7 +16,7 @@
 
 kubernetes.io > Documentation > Concepts > Overview > Working with Kubernetes Objects > [Labels and Selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors)
 
-### Create 3 pods with names nginx1,nginx2,nginx3. All of them should have the label app=v1
+**Create 3 pods with names nginx1,nginx2,nginx3. All of them should have the label app=v1**
 
 <details><summary>show</summary>
 <p>
@@ -32,7 +32,7 @@ for i in `seq 1 3`; do kubectl run nginx$i --image=nginx -l app=v1 ; done
 </p>
 </details>
 
-### Show all labels of the pods
+**Show all labels of the pods**
 
 <details><summary>show</summary>
 <p>
@@ -44,7 +44,7 @@ kubectl get po --show-labels
 </p>
 </details>
 
-### Change the labels of pod 'nginx2' to be app=v2
+**Change the labels of pod 'nginx2' to be app=v2**
 
 <details><summary>show</summary>
 <p>
@@ -56,7 +56,7 @@ kubectl label po nginx2 app=v2 --overwrite
 </p>
 </details>
 
-### Get the label 'app' for the pods (show a column with APP labels)
+**Get the label 'app' for the pods (show a column with APP labels)**
 
 <details><summary>show</summary>
 <p>
@@ -70,7 +70,7 @@ kubectl get po --label-columns=app
 </p>
 </details>
 
-### Get only the 'app=v2' pods
+**Get only the 'app=v2' pods**
 
 <details><summary>show</summary>
 <p>
@@ -86,7 +86,7 @@ kubectl get po --selector=app=v2
 </p>
 </details>
 
-### Add a new label tier=web to all pods having 'app=v2' or 'app=v1' labels
+**Add a new label tier=web to all pods having 'app=v2' or 'app=v1' labels**
 
 <details><summary>show</summary>
 <p>
@@ -98,7 +98,7 @@ kubectl label po -l "app in(v1,v2)" tier=web
 </p>
 </details>
 
-### Add an annotation 'owner: marketing' to all pods having 'app=v2' label
+**Add an annotation 'owner: marketing' to all pods having 'app=v2' label**
 
 <details><summary>show</summary>
 <p>
@@ -110,7 +110,7 @@ kubectl annotate po -l "app=v2" owner=marketing
 </p>
 </details>
 
-### Remove the 'app' label from the pods we created before
+**Remove the 'app' label from the pods we created before**
 
 <details><summary>show</summary>
 <p>
@@ -126,7 +126,7 @@ kubectl label po -l app app-
 </p>
 </details>
 
-### Annotate pods nginx1, nginx2, nginx3 with "description='my description'" value
+**Annotate pods nginx1, nginx2, nginx3 with "description='my description'" value**
 
 <details><summary>show</summary>
 <p>
@@ -142,7 +142,7 @@ kubectl annotate po nginx{1..3} description='my description'
 </p>
 </details>
 
-### Check the annotations for pod nginx1
+**Check the annotations for pod nginx1**
 
 <details><summary>show</summary>
 <p>
@@ -164,7 +164,7 @@ As an alternative to using `| grep` you can use jsonPath like `kubectl get po ng
 </p>
 </details>
 
-### Remove the annotations for these three pods
+**Remove the annotations for these three pods**
 
 <details><summary>show</summary>
 <p>
@@ -176,7 +176,7 @@ kubectl annotate po nginx{1..3} description-
 </p>
 </details>
 
-### Remove these pods to have a clean state in your cluster
+**Remove these pods to have a clean state in your cluster**
 
 <details><summary>show</summary>
 <p>
@@ -190,7 +190,7 @@ kubectl delete po nginx{1..3}
 
 ## Pod Placement
 
-### Create a pod that will be deployed to a Node that has the label 'accelerator=nvidia-tesla-p100'
+**Create a pod that will be deployed to a Node that has the label 'accelerator=nvidia-tesla-p100'**
 
 <details><summary>show</summary>
 <p>
@@ -248,7 +248,7 @@ spec:
 </p>
 </details>
 
-### Taint a node with key `tier` and value `frontend` with the effect `NoSchedule`. Then, create a pod that tolerates this taint.
+**Taint a node with key `tier` and value `frontend` with the effect `NoSchedule`. Then, create a pod that tolerates this taint.**
 
 <details><summary>show</summary>
 <p>
@@ -318,7 +318,7 @@ kubectl create -f pod.yaml
 
 kubernetes.io > Documentation > Concepts > Workloads > Workload Resources > [Deployments](https://kubernetes.io/docs/concepts/workloads/controllers/deployment)
 
-### Create a deployment with image nginx:1.18.0, called nginx, having 2 replicas, defining port 80 as the port that this container exposes (don't create a service for this deployment)
+**Create a deployment with image nginx:1.18.0, called nginx, having 2 replicas, defining port 80 as the port that this container exposes (don't create a service for this deployment)**
 
 > ⚠ Biggest takeaway: <span style="color:red"> ports.containerPort is informational. </span>
 >
@@ -355,7 +355,7 @@ kubectl create deploy nginx --image=nginx:1.18.0 --replicas=2 --port=80
 </p>
 </details>
 
-### View the YAML of this deployment
+**View the YAML of this deployment**
 
 <details><summary>show</summary>
 <p>
@@ -367,7 +367,7 @@ kubectl get deploy nginx -o yaml
 </p>
 </details>
 
-### View the YAML of the replica set that was created by this deployment
+**View the YAML of the replica set that was created by this deployment**
 
 <details><summary>show</summary>
 <p>
@@ -384,7 +384,7 @@ kubectl get rs nginx-7bf7478b77 -o yaml
 </p>
 </details>
 
-### Get the YAML for one of the pods
+**Get the YAML for one of the pods**
 
 <details><summary>show</summary>
 <p>
@@ -400,7 +400,7 @@ kubectl get po nginx-7bf7478b77-gjzp8 -o yaml
 </p>
 </details>
 
-### Check how the deployment rollout is going
+**Check how the deployment rollout is going**
 
 <details><summary>show</summary>
 <p>
@@ -412,7 +412,7 @@ kubectl rollout status deploy nginx
 </p>
 </details>
 
-### Update the nginx image to nginx:1.19.8
+**Update the nginx image to nginx:1.19.8**
 
 <details><summary>show</summary>
 <p>
@@ -428,7 +428,7 @@ The syntax of the 'kubectl set image' command is `kubectl set image (-f FILENAME
 </p>
 </details>
 
-### Check the rollout history and confirm that the replicas are OK
+**Check the rollout history and confirm that the replicas are OK**
 
 <details><summary>show</summary>
 <p>
@@ -443,7 +443,7 @@ kubectl get po
 </p>
 </details>
 
-### Undo the latest rollout and verify that new pods have the old image (nginx:1.18.0)
+**Undo the latest rollout and verify that new pods have the old image (nginx:1.18.0)**
 
 <details><summary>show</summary>
 <p>
@@ -458,7 +458,7 @@ kubectl describe po nginx-5ff4457d65-nslcl | grep -i image # should be nginx:1.1
 </p>
 </details>
 
-### Do an on purpose update of the deployment with a wrong image nginx:1.91
+**Do an on purpose update of the deployment with a wrong image nginx:1.91**
 
 <details><summary>show</summary>
 <p>
@@ -474,7 +474,7 @@ kubectl edit deploy nginx
 </p>
 </details>
 
-### Verify that something's wrong with the rollout
+**Verify that something's wrong with the rollout**
 
 <details><summary>show</summary>
 <p>
@@ -488,7 +488,7 @@ kubectl get po # you'll see 'ErrImagePull' or 'ImagePullBackOff'
 </p>
 </details>
 
-### Return the deployment to the second revision (number 2) and verify the image is nginx:1.19.8
+**Return the deployment to the second revision (number 2) and verify the image is nginx:1.19.8**
 
 <details><summary>show</summary>
 <p>
@@ -502,7 +502,7 @@ kubectl rollout status deploy nginx # Everything should be OK
 </p>
 </details>
 
-### Check the details of the fourth revision (number 4)
+**Check the details of the fourth revision (number 4)**
 
 <details><summary>show</summary>
 <p>
@@ -514,7 +514,7 @@ kubectl rollout history deploy nginx --revision=4 # You'll also see the wrong im
 </p>
 </details>
 
-### Scale the deployment to 5 replicas
+**Scale the deployment to 5 replicas**
 
 <details><summary>show</summary>
 <p>
@@ -528,7 +528,7 @@ kubectl describe deploy nginx
 </p>
 </details>
 
-### Autoscale the deployment, pods between 5 and 10, targetting CPU utilization at 80%
+**Autoscale the deployment, pods between 5 and 10, targetting CPU utilization at 80%**
 
 > ⚠ 这个功能很棒啊，我以前都没有留意到过！这个应用价值很大！
 >
@@ -546,7 +546,7 @@ kubectl get hpa nginx
 </p>
 </details>
 
-### Pause the rollout of the deployment
+**Pause the rollout of the deployment**
 
 <details><summary>show</summary>
 <p>
@@ -558,7 +558,7 @@ kubectl rollout pause deploy nginx
 </p>
 </details>
 
-### Update the image to nginx:1.19.9 and check that there's nothing going on, since we paused the rollout
+**Update the image to nginx:1.19.9 and check that there's nothing going on, since we paused the rollout**
 
 <details><summary>show</summary>
 <p>
@@ -574,7 +574,7 @@ kubectl rollout history deploy nginx # no new revision
 </p>
 </details>
 
-### Resume the rollout and check that the nginx:1.19.9 image has been applied
+**Resume the rollout and check that the nginx:1.19.9 image has been applied**
 
 <details><summary>show</summary>
 <p>
@@ -588,7 +588,7 @@ kubectl rollout history deploy nginx --revision=6 # insert the number of your la
 </p>
 </details>
 
-### Delete the deployment and the horizontal pod autoscaler you created
+**Delete the deployment and the horizontal pod autoscaler you created**
 
 <details><summary>show</summary>
 <p>
@@ -604,7 +604,7 @@ kubectl delete deploy/nginx hpa/nginx
 </p>
 </details>
 
-### Implement canary deployment by running two instances of nginx marked as version=v1 and version=v2 so that the load is balanced at 75%-25% ratio （ 非常不想学， but ⭐⭐⭐⭐⭐ 必考 ）
+**Implement canary deployment by running two instances of nginx marked as version=v1 and version=v2 so that the load is balanced at 75%-25% ratio （ 非常不想学， but ⭐⭐⭐⭐⭐ 必考 ）**
 
 > [reddit](https://www.reddit.com/r/kubernetes/comments/12s5rxf/how_to_practice_real_exam_questions_for_ckad/) 上说，这道题还是必考题目，所以还是要掌握的。
 >
@@ -769,7 +769,7 @@ version-2
 
 ## Jobs
 
-### Create a job named pi with image perl:5.34 that runs the command with arguments "perl -Mbignum=bpi -wle 'print bpi(2000)'"
+**Create a job named pi with image perl:5.34 that runs the command with arguments "perl -Mbignum=bpi -wle 'print bpi(2000)'"**
 
 <details><summary>show</summary>
 <p>
@@ -781,7 +781,7 @@ kubectl create job pi  --image=perl:5.34 -- perl -Mbignum=bpi -wle 'print bpi(20
 </p>
 </details>
 
-### Wait till it's done, get the output
+**Wait till it's done, get the output**
 
 <details><summary>show</summary>
 <p>
@@ -812,7 +812,7 @@ kubectl delete job pi
 </p>
 </details>
 
-### Create a job with the image busybox that executes the command 'echo hello;sleep 30;echo world'
+**Create a job with the image busybox that executes the command 'echo hello;sleep 30;echo world'**
 
 <details><summary>show</summary>
 <p>
@@ -824,7 +824,7 @@ kubectl create job busybox --image=busybox -- /bin/sh -c 'echo hello;sleep 30;ec
 </p>
 </details>
 
-### Follow the logs for the pod (you'll wait for 30 seconds)
+**Follow the logs for the pod (you'll wait for 30 seconds)**
 
 <details><summary>show</summary>
 <p>
@@ -837,7 +837,7 @@ kubectl logs busybox-ptx58 -f # follow the logs
 </p>
 </details>
 
-### See the status of the job, describe it and see the logs
+**See the status of the job, describe it and see the logs**
 
 <details><summary>show</summary>
 <p>
@@ -851,7 +851,7 @@ kubectl logs job/busybox
 </p>
 </details>
 
-### Delete the job
+**Delete the job**
 
 <details><summary>show</summary>
 <p>
@@ -863,7 +863,7 @@ kubectl delete job busybox
 </p>
 </details>
 
-### Create a job but ensure that it will be automatically terminated by kubernetes if it takes more than 30 seconds to execute
+**Create a job but ensure that it will be automatically terminated by kubernetes if it takes more than 30 seconds to execute**
 
 > ⚠ Takeaway:
 >
@@ -910,7 +910,7 @@ status: {}
 </p>
 </details>
 
-### Create the same job, make it run 5 times, one after the other. Verify its status and delete it
+**Create the same job, make it run 5 times, one after the other. Verify its status and delete it**
 
 > ⚠ Question: what's the purpose of running the job multiple times?
 >
@@ -1058,7 +1058,7 @@ kubernetes.io > Documentation > Tasks > Run Jobs > [Running Automated Tasks with
 > - for cron jobs that relating to the business logic, manage them in the application code. (I think most of the cron jobs are of this type.)
 > - for cron jobs that relating to the infrastructure, manage them in the IaC codebase.
 
-### Create a cron job with image busybox that runs on a schedule of `*/1 * * * *` and writes 'date; echo Hello from the Kubernetes cluster' to standard output
+**Create a cron job with image busybox that runs on a schedule of `*/1 * * * *` and writes 'date; echo Hello from the Kubernetes cluster' to standard output**
 
 <details><summary>show</summary>
 <p>
@@ -1070,7 +1070,7 @@ kubectl create cronjob busybox --image=busybox --schedule="*/1 * * * *" -- /bin/
 </p>
 </details>
 
-### See its logs and delete it
+**See its logs and delete it**
 
 <details><summary>show</summary>
 <p>
@@ -1084,7 +1084,7 @@ kubectl delete cj busybox --force # cj stands for cronjob and --force to delete 
 </p>
 </details>
 
-### Create the same cron job again, and watch the status. Once it ran, check which job ran by the created cron job. Check the log, and delete the cron job
+**Create the same cron job again, and watch the status. Once it ran, check which job ran by the created cron job. Check the log, and delete the cron job**
 
 <details><summary>show</summary>
 <p>
@@ -1101,7 +1101,7 @@ kubectl delete cj busybox
 </p>
 </details>
 
-### Create a cron job with image busybox that runs every minute and writes 'date; echo Hello from the Kubernetes cluster' to standard output. The cron job should be terminated if it takes more than 17 seconds to start execution after its scheduled time (i.e. the job missed its scheduled time).
+**Create a cron job with image busybox that runs every minute and writes 'date; echo Hello from the Kubernetes cluster' to standard output. The cron job should be terminated if it takes more than 17 seconds to start execution after its scheduled time (i.e. the job missed its scheduled time).**
 
 > checkpoint: <span style="color:red"> please put the parameter to the right level, otherwise it won't work. </span>
 
@@ -1148,7 +1148,7 @@ status: {}
 </p>
 </details>
 
-### Create a cron job with image busybox that runs every minute and writes 'date; echo Hello from the Kubernetes cluster' to standard output. The cron job should be terminated if it successfully starts but takes more than 12 seconds to complete execution.
+**Create a cron job with image busybox that runs every minute and writes 'date; echo Hello from the Kubernetes cluster' to standard output. The cron job should be terminated if it successfully starts but takes more than 12 seconds to complete execution.**
 
 > checkpoint: some parameters belong to job, some belongs to cronjob.
 > <span style="color:red"> Please put them to the right level, otherwise it won't work. </span>
@@ -1196,7 +1196,7 @@ status: {}
 </p>
 </details>
 
-### Create a job from cronjob.
+**Create a job from cronjob.**
 
 > Takeaway: this command is particularly useful if:
 >

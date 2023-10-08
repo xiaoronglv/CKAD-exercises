@@ -6,7 +6,7 @@
 
 ## CRD in K8s
 
-### Create a CustomResourceDefinition manifest file for an Operator with the following specifications :
+**Create a CustomResourceDefinition manifest file for an Operator with the following specifications :**
 
 - _Name_ : `operators.stable.example.com`
 - _Group_ : `stable.example.com`
@@ -57,7 +57,7 @@ spec:
 </p>
 </details>
 
-### Create the CRD resource in the K8S API
+**Create the CRD resource in the K8S API**
 
 <details><summary>show</summary>
 <p>
@@ -69,7 +69,7 @@ kubectl apply -f operator-crd.yml
 </p>
 </details>
 
-### Create custom object from the CRD
+**Create custom object from the CRD**
 
 - _Name_ : `operator-sample`
 - _Kind_: `Operator`
