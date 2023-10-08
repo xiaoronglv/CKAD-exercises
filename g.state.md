@@ -264,6 +264,8 @@ There are lots of different types per cloud provider [(see here)](https://kubern
 
 **Create a busybox pod with 'sleep 3600' as arguments. Copy '/etc/passwd' from the pod to your local folder**
 
+> ⚠ attention: you must specify the destination folder and `file name`, otherwise it will fail.
+
 <details><summary>show</summary>
 <p>
 

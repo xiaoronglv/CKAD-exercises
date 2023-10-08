@@ -16,7 +16,7 @@ helm create chart-test ## this would create a helm
 </p>
 </details>
 
-** Running a Helm chart**
+**Running a Helm chart**
 
 <details><summary>show</summary>
 <p>
